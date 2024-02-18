@@ -1,9 +1,20 @@
-export const TableRowItem = () => {
+import React from 'react';
+interface OrganizationRepo {
+    name: string;
+    open_issues: string;
+    stargazers_count: number;
+}
+
+export const TableRowItem: React.FC<OrganizationRepo> = ({
+    name,
+    open_issues,
+    stargazers_count
+}) => {
     return (
         <tr>
-            <td>Data 1</td>
-            <td>Data 2</td>
-            <td>Data 3</td>
+            <td>{name}</td>
+            <td>{open_issues}</td>
+            <td>{stargazers_count}</td>
         </tr>
     )
 };

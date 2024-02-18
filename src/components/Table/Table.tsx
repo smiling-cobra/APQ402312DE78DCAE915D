@@ -1,10 +1,18 @@
 import React from "react";
+import { TableRowItem } from "./TableRowItem";
 
-interface BaseTableProps {
-    children: React.ReactNode;
+
+interface OrganizationRepo {
+    name: string;
+    open_issues: string;
+    stargazers_count: number;
 }
 
-export const BaseTable = (props: BaseTableProps) => {
+interface BaseTableProps {
+    repositories: OrganizationRepo[];
+}
+
+export const BaseTable: React.FC<BaseTableProps> = ({ repositories }) => {
     return (
         <table>
             <thead>
@@ -15,7 +23,7 @@ export const BaseTable = (props: BaseTableProps) => {
                 </tr>
             </thead>
             <tbody>
-                {props.children}
+                {repositories.map((repo, index) => <TableRowItem key={index} {...repo} />)}
             </tbody>
         </table>
     )
