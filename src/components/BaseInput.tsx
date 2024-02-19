@@ -1,14 +1,16 @@
 import React from "react";
 
 interface BaseInputProps {
-  id: string;
-  ref: React.Ref<HTMLInputElement>;
-  type: string;
-  name: string;
-  value: string;
-  labelname: string;
-  placeholder: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  id?: string;
+  ref?: React.Ref<HTMLInputElement>;
+  max?: number;
+  min?: number;
+  type?: string;
+  name?: string;
+  value?: string | number;
+  labelname?: string;
+  placeholder?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
 }
 

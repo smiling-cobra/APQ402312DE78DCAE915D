@@ -1,9 +1,5 @@
 import React from 'react';
-interface OrganizationRepo {
-    name: string;
-    open_issues: string;
-    stargazers_count: number;
-}
+import { OrganizationRepo } from '../../types';
 
 export const TableRowItem: React.FC<OrganizationRepo> = ({
     name,

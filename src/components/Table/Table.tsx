@@ -1,12 +1,7 @@
 import React from "react";
 import { TableRowItem } from "./TableRowItem";
-
-
-interface OrganizationRepo {
-    name: string;
-    open_issues: string;
-    stargazers_count: number;
-}
+import './styles.css';
+import { OrganizationRepo } from "../../types";
 
 interface BaseTableProps {
     repositories: OrganizationRepo[];
@@ -14,17 +9,19 @@ interface BaseTableProps {
 
 export const BaseTable: React.FC<BaseTableProps> = ({ repositories }) => {
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Issues</th>
-                    <th>Stars</th>
-                </tr>
-            </thead>
-            <tbody>
-                {repositories.map((repo, index) => <TableRowItem key={index} {...repo} />)}
-            </tbody>
-        </table>
+        <div className="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Issues</th>
+                        <th>Stars</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {repositories.map((repo, index) => <TableRowItem key={index} {...repo} />)}
+                </tbody>
+            </table>
+        </div>
     )
 };

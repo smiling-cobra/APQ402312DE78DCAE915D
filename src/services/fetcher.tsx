@@ -1,6 +1,6 @@
 const accessToken = import.meta.env.VITE_GIT_ACCESS_TOKEN;
 
-export const baseFetcher = async (url: string) => {
+export const fetcher = async (url: string) => {
   const response = await fetch(url, {
     method: 'GET',
     headers: {
