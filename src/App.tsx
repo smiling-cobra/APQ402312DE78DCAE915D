@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="app-container">
       <header>
-        <h1>Git observer</h1>
+        <h1>Git retriever</h1>
       </header>
       <Main />
       <footer>

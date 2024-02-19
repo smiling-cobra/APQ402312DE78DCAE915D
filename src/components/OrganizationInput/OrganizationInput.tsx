@@ -1,5 +1,6 @@
 import Select, { SingleValue } from "react-select";
-import { Organization, SelectOptions } from "../types";
+import { Organization, SelectOptions } from "../../types";
+import "./styles.css";
 
 interface OrganizationInputProps {
   options: SelectOptions[];
@@ -15,9 +16,9 @@ export const OrganizationInput: React.FC<OrganizationInputProps> = ({
   error,
 }) => {
   return (
-    <div>
-      {error && <span>{error}</span>}
+    <div className="organization-input-container">
       <Select
+        className="organization-input"
         placeholder="Start typing..."
         options={options}
         onInputChange={onInputChange}
@@ -25,6 +26,7 @@ export const OrganizationInput: React.FC<OrganizationInputProps> = ({
           onChange(option?.value)
         }
       />
+      {error && <span className="organization-input__error">{error}</span>}
     </div>
   );
 };

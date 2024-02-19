@@ -1,0 +1,13 @@
+.base-input__container {
+    padding: 8px;
+    width: 100%;
+}
+
+.base-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 14px;
+}

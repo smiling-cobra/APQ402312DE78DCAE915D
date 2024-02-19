@@ -1,22 +1,29 @@
+import React from "react";
 import { useState, useMemo, ChangeEvent } from "react";
 import { BaseTable } from "../components/Table/Table";
 import { debounce, filterRepos } from "../utils";
 import { useOrganizations } from "../services/hooks/useOrganizations";
 import { useRepositories } from "../services/hooks/useRepositories";
-import { OrganizationInput } from "../components/OrganizationInput";
-import { OpenIssuesFilter, Organization, OrganizationRepo, SelectOptions } from "../types";
-import { BaseInput } from "../components/BaseInput";
-
+import { OrganizationInput } from "../components/OrganizationInput/OrganizationInput";
+import { BaseInput } from "../components/Input/BaseInput";
+import {
+  OpenIssuesFilter,
+  Organization,
+  OrganizationRepo,
+  SelectOptions,
+} from "../types";
+import "./styles.css";
+import { Spinner } from "../components/Spinner/Spinner";
 
 export const Main = () => {
-  const [page] = useState(1);
+  const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
   const [selectedOrg, setSelectedOrg] = useState<Organization>();
 
   const [repoNameFilter, setRepoNameFilter] = useState("");
   const [openIssuesFilter, setOpenIssuesFilter] = useState<OpenIssuesFilter>({
     min: 0,
-    max: 0,
+    max: 50,
   });
 
   const { data: allOrganizations, error: orgErrors } = useOrganizations(query);
@@ -55,7 +62,7 @@ export const Main = () => {
     const { name, value } = e.target;
     const parsedValue = Number(value);
 
-    setOpenIssuesFilter(prev => {
+    setOpenIssuesFilter((prev) => {
       const newState = { ...prev };
 
       if (name === "min") {
@@ -70,48 +77,60 @@ export const Main = () => {
     });
   };
 
+  const handlePageChange = (direction: string) => {
+    setPage((currentPage) =>
+      direction === "next" ? currentPage + 1 : Math.max(0, currentPage - 1)
+    );
+  };
+
   return (
-    <main className="main-container">
-      <OrganizationInput
-        options={selectOptions}
-        error={orgErrors?.message}
-        onInputChange={handleOrganizationChange}
-        onChange={setSelectedOrg}
-      />
-      {selectedOrg ? (
-        <div className="filters-container">
-          <BaseInput
-            type="text"
-            value={repoNameFilter}
-            onChange={handleNameFilterChange}
-          />
-          <div>
-            <BaseInput
-              name="min"
-              min={0}
-              type="number"
-              max={openIssuesFilter.max}
-              labelname="Min issues"
-              value={openIssuesFilter.min}
-              onChange={handleIssueFilterChange}
-            />
-            <BaseInput
-              name="max"
-              min={openIssuesFilter.min}
-              max={Infinity}
-              type="number"
-              labelname="Max issues"
-              value={openIssuesFilter.max}
-              onChange={handleIssueFilterChange}
-            />
-          </div>
+    <main>
+      <div className="form">
+        <OrganizationInput
+          options={selectOptions}
+          error={orgErrors?.message}
+          onInputChange={handleOrganizationChange}
+          onChange={setSelectedOrg}
+        />
+        <div className="form-filters">
+          {selectedOrg ? (
+            <React.Fragment>
+              <BaseInput
+                type="text"
+                value={repoNameFilter}
+                placeholder="Type repo name..."
+                onChange={handleNameFilterChange}
+              />
+              <div className="issues-filter-container">
+                <BaseInput
+                  name="min"
+                  min={0}
+                  type="number"
+                  max={openIssuesFilter.max}
+                  value={openIssuesFilter.min}
+                  onChange={handleIssueFilterChange}
+                />
+                <BaseInput
+                  name="max"
+                  min={openIssuesFilter.min}
+                  max={Infinity}
+                  type="number"
+                  value={openIssuesFilter.max}
+                  onChange={handleIssueFilterChange}
+                />
+              </div>
+            </React.Fragment>
+          ) : null}
         </div>
-      ) : null}
+      </div>
       {isReposLoading ? (
-        <span>Repos loading...</span>
+        <Spinner />
       ) : organizationRepos.length ? (
-        <BaseTable repositories={organizationRepos} />
-      ) : <span>Nothing has been found... Keep tweaking filters!</span>}
+        <BaseTable
+          onPageChange={handlePageChange}
+          repositories={organizationRepos}
+        />
+      ) : null}
     </main>
   );
 };

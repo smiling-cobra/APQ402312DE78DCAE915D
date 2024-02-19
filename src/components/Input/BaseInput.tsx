@@ -1,4 +1,5 @@
 import React from "react";
+import "./styles.css";
 
 interface BaseInputProps {
   id?: string;
@@ -17,9 +18,9 @@ interface BaseInputProps {
 export const BaseInput = React.forwardRef<HTMLInputElement, BaseInputProps>(
   (props: BaseInputProps, ref: React.Ref<HTMLInputElement>) => {
     return (
-      <div className={props.className}>
+      <div className="base-input__container">
         <label htmlFor={props.id}>{props.labelname}</label>
-        <input {...props} ref={ref} />
+        <input className={`base-input ${props.className ?? ""}`} {...props} ref={ref} />
       </div>
     );
   }
