@@ -1,11 +1,9 @@
-import React from "react";
 import { useState, useMemo, ChangeEvent } from "react";
 import { BaseTable } from "../components/Table/Table";
 import { debounce, filterRepos } from "../utils";
 import { useOrganizations } from "../services/hooks/useOrganizations";
 import { useRepositories } from "../services/hooks/useRepositories";
 import { OrganizationInput } from "../components/OrganizationInput/OrganizationInput";
-import { BaseInput } from "../components/Input/BaseInput";
 import {
   OpenIssuesFilter,
   Organization,
@@ -14,6 +12,7 @@ import {
 } from "../types";
 import "./styles.css";
 import { Spinner } from "../components/Spinner/Spinner";
+import { Filters } from "../components/Filters/Filters";
 
 export const Main = () => {
   const [page, setPage] = useState(1);
@@ -92,36 +91,13 @@ export const Main = () => {
           onInputChange={handleOrganizationChange}
           onChange={setSelectedOrg}
         />
-        <div className="form-filters">
-          {selectedOrg ? (
-            <React.Fragment>
-              <BaseInput
-                type="text"
-                value={repoNameFilter}
-                placeholder="Type repo name..."
-                onChange={handleNameFilterChange}
-              />
-              <div className="issues-filter-container">
-                <BaseInput
-                  name="min"
-                  min={0}
-                  type="number"
-                  max={openIssuesFilter.max}
-                  value={openIssuesFilter.min}
-                  onChange={handleIssueFilterChange}
-                />
-                <BaseInput
-                  name="max"
-                  min={openIssuesFilter.min}
-                  max={Infinity}
-                  type="number"
-                  value={openIssuesFilter.max}
-                  onChange={handleIssueFilterChange}
-                />
-              </div>
-            </React.Fragment>
-          ) : null}
-        </div>
+        <Filters
+          selectedOrg={selectedOrg}
+          repoNameFilter={repoNameFilter}
+          handleNameFilterChange={handleNameFilterChange}
+          openIssuesFilter={openIssuesFilter}
+          handleIssueFilterChange={handleIssueFilterChange}
+        />
       </div>
       {isReposLoading ? (
         <Spinner />

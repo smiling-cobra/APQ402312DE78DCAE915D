@@ -1,4 +1,13 @@
 .organization-input-container {
     flex: 1;
     cursor: pointer;
+    position: relative;
+}
+
+.organization-input__error {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    color: red;
+    font-size: 14px;
 }

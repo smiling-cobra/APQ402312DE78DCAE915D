@@ -17,6 +17,9 @@ export const OrganizationInput: React.FC<OrganizationInputProps> = ({
 }) => {
   return (
     <div className="organization-input-container">
+      {error && <span className="organization-input__error">
+        {`Something wrong with your request. ${error}.`}
+      </span>}
       <Select
         className="organization-input"
         placeholder="Start typing..."
@@ -26,7 +29,6 @@ export const OrganizationInput: React.FC<OrganizationInputProps> = ({
           onChange(option?.value)
         }
       />
-      {error && <span className="organization-input__error">{error}</span>}
     </div>
   );
 };

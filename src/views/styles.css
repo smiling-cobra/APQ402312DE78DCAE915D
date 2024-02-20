@@ -5,25 +5,12 @@ main {
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
-    padding: 16px;
+    padding: 32px;
 }
 
 .form {
     flex: 1;
     display: flex;
     align-items: baseline;
-    width: 100%;
-}
-
-.form-filters {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.issues-filter-container {
-    display: flex;
     width: 100%;
 }
