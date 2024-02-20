@@ -1,18 +1,19 @@
-import { useState, useMemo, ChangeEvent } from "react";
+import { useState, useMemo, ChangeEvent, useCallback } from "react";
 import { BaseTable } from "../components/Table/Table";
-import { debounce, filterRepos } from "../utils";
+import { debounce, filterRepos, updateOpenIssuesFilter } from "../utils";
 import { useOrganizations } from "../services/hooks/useOrganizations";
 import { useRepositories } from "../services/hooks/useRepositories";
 import { OrganizationInput } from "../components/OrganizationInput/OrganizationInput";
+import { Spinner } from "../components/Spinner/Spinner";
+import { Filters } from "../components/Filters/Filters";
 import {
   OpenIssuesFilter,
   Organization,
   OrganizationRepo,
+  Pagination,
   SelectOptions,
 } from "../types";
 import "./styles.css";
-import { Spinner } from "../components/Spinner/Spinner";
-import { Filters } from "../components/Filters/Filters";
 
 export const Main = () => {
   const [page, setPage] = useState(1);
@@ -57,28 +58,24 @@ export const Main = () => {
     setRepoNameFilter(e.target.value);
   };
 
-  const handleIssueFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    const parsedValue = Number(value);
+  const handleIssueFilterChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
+      const parsedValue = Number(value);
 
-    setOpenIssuesFilter((prev) => {
-      const newState = { ...prev };
+      setOpenIssuesFilter((prev) =>
+        updateOpenIssuesFilter(prev, name, parsedValue)
+      );
+    },
+    []
+  );
 
-      if (name === "min") {
-        newState.min = parsedValue;
-        return newState;
-      } else if (name === "max") {
-        newState.max = parsedValue;
-        return newState;
-      }
-
-      return newState;
-    });
-  };
-
-  const handlePageChange = (direction: string) => {
-    setPage((currentPage) =>
-      direction === "next" ? currentPage + 1 : Math.max(0, currentPage - 1)
+  const handlePageChange = (direction: Pagination) => {
+    setPage(
+      (currentPage) =>
+        direction === Pagination.NEXT
+          ? currentPage + 1
+          : Math.max(1, currentPage - 1) // Prevent negative page numbers
     );
   };
 
@@ -88,14 +85,14 @@ export const Main = () => {
         <OrganizationInput
           options={selectOptions}
           error={orgErrors?.message}
-          onInputChange={handleOrganizationChange}
           onChange={setSelectedOrg}
+          onInputChange={handleOrganizationChange}
         />
         <Filters
           selectedOrg={selectedOrg}
           repoNameFilter={repoNameFilter}
-          handleNameFilterChange={handleNameFilterChange}
           openIssuesFilter={openIssuesFilter}
+          handleNameFilterChange={handleNameFilterChange}
           handleIssueFilterChange={handleIssueFilterChange}
         />
       </div>

@@ -1,10 +1,10 @@
 import React from "react";
 import { TableRowItem } from "./TableRowItem";
-import { OrganizationRepo } from "../../types";
+import { OrganizationRepo, Pagination } from "../../types";
 import './styles.css';
 
 interface BaseTableProps {
-    onPageChange: (direction: string) => void;
+    onPageChange: (direction: Pagination) => void;
     repositories: OrganizationRepo[];
 }
 
@@ -20,19 +20,19 @@ export const BaseTable: React.FC<BaseTableProps> = ({ repositories, onPageChange
                     </tr>
                 </thead>
                 <tbody>
-                    {repositories.map((repo, index) => <TableRowItem key={index} {...repo} />)}
+                    {repositories.map(repo => <TableRowItem key={`${repo.name}`} {...repo} />)}
                 </tbody>
             </table>
             <div className="table-pagination__container">
                 <button
                     className="table-pagination__button"
-                    onClick={() => onPageChange('previous')}
+                    onClick={() => onPageChange(Pagination.PREV)}
                 >
                     Previous
                 </button>
                 <button
                     className="table-pagination__button"
-                    onClick={() => onPageChange('next')}
+                    onClick={() => onPageChange(Pagination.NEXT)}
                 >
                     Next
                 </button>

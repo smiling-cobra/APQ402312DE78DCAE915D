@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import { OpenIssuesFilter, Organization } from "../../types";
+import { FilterName, OpenIssuesFilter, Organization } from "../../types";
 import { BaseInput } from "../Input/BaseInput";
 import "./styles.css";
 
@@ -28,16 +28,16 @@ export const Filters: React.FC<FiltersProps> = ({
         onChange={handleNameFilterChange}
       />
       <BaseInput
-        name="min"
         type="number"
         min={0}
+        name={FilterName.MIN}
         max={openIssuesFilter.max}
         value={openIssuesFilter.min}
         onChange={handleIssueFilterChange}
       />
       <BaseInput
-        name="max"
         type="number"
+        name={FilterName.MAX}
         min={openIssuesFilter.min}
         max={Infinity}
         value={openIssuesFilter.max}

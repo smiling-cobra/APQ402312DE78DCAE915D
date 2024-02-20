@@ -1,9 +1,9 @@
-interface SelectOptions {
+export interface SelectOptions {
     value: Organization;
     label: string;
   }
   
-  interface Organization {
+  export interface Organization {
     [key: string]: string;
     id: string;
     name: string;
@@ -11,15 +11,23 @@ interface SelectOptions {
     repos_url: string;
   }
   
-  interface OrganizationRepo {
+  export interface OrganizationRepo {
     name: string;
     open_issues: number;
     stargazers_count: number;
   }
 
-  interface OpenIssuesFilter {
+  export interface OpenIssuesFilter {
     min: number;
     max: number;
   }
 
-  export type { SelectOptions, Organization, OrganizationRepo, OpenIssuesFilter };
+  export enum Pagination {
+    NEXT = "next",
+    PREV = "previous",
+  }
+
+  export enum FilterName {
+    MIN = "min",
+    MAX = "max",
+  }

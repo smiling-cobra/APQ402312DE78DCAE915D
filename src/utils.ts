@@ -1,4 +1,4 @@
-import { OpenIssuesFilter, OrganizationRepo } from "./types";
+import { FilterName, OpenIssuesFilter, OrganizationRepo } from "./types";
 
 export const debounce = <T extends unknown[]>(
     func: (...args: T) => void,
@@ -23,4 +23,22 @@ export const filterRepos = (
       repo.open_issues <= openIssuesFilter.max; // Filter by open issues
     return repoNameMatch && openIssuesMatch;
   });
+};
+
+export const updateOpenIssuesFilter = (
+  prevState: OpenIssuesFilter,
+  filterName: string,
+  value: number
+) => {
+  const newState = { ...prevState };
+
+  if (filterName === FilterName.MIN) {
+    newState.min = value;
+    return newState;
+  } else if (filterName === FilterName.MAX) {
+    newState.max = value;
+    return newState;
+  }
+
+  return newState;
 };
