@@ -73,7 +73,7 @@ export const OrganizationInput: React.FC<OrganizationInputProps> = ({
   return (
     <div className="organization-input-container">
       {orgError && <span className="organization-input__error">
-        {`Something wrong with your request. ${orgError}.`}
+        {`Something is wrong with your request. ${orgError}.`}
       </span>}
       <Select
         isDisabled={isReposError}

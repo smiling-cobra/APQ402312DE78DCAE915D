@@ -4,21 +4,21 @@
   min-height: 100vh;
 }
 
-.app-container {
+.app {
   flex: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  padding: 32px;
+  padding: calc(var(--base-gap) * 4);
   box-sizing: border-box;
   height: 100%;
 }
 
 header {
+  width: 100%;
   display: flex;
   justify-content: flex-start;
-  width: 100%;
   flex-shrink: 0;
 }
 

@@ -1,19 +1,16 @@
-import { Main } from './views/Main'
-import './App.css'
+import { Main } from "./views/MainView";
+import "./App.css";
 
-function App() {
+const App = () => (
+  <div className="app">
+    <header>
+      <h1>Git retriever</h1>
+    </header>
+    <Main />
+    <footer>
+      <p>&copy; {new Date().getFullYear()}</p>
+    </footer>
+  </div>
+);
 
-  return (
-    <div className="app-container">
-      <header>
-        <h1>Git retriever</h1>
-      </header>
-      <Main />
-      <footer>
-        <p>&copy; {new Date().getFullYear()}</p>
-      </footer>
-    </div>
-  )
-}
-
-export default App
+export default App;

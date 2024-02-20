@@ -10,18 +10,18 @@ table {
 }
 
 tr {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--input-color);
 }
 
 th, td {
-    padding: 8px;
+    padding: var(--base-gap);
     text-align: left;
 }
 
 .error-message {
     height: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
-    color: red;
+    justify-content: center;
+    color: var(--error-color);
 }

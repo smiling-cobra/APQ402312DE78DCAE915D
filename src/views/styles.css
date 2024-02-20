@@ -5,7 +5,7 @@ main {
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
-    padding: 32px;
+    padding: calc(var(--base-gap) * 4);
 }
 
 .form {

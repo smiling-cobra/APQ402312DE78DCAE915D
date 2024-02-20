@@ -1,19 +1,15 @@
 .base-input__container {
-    padding: 8px;
+    padding: var(--base-gap);
     width: 100%;
 }
 
 .base-input {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
     width: 100%;
     box-sizing: border-box;
-    font-size: 14px;
+    padding: var(--base-gap);
+    border: 1px solid var(--input-color);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-m);
     background-color: var(--input-background);
     color: var(--input-color);
-}
-
-.base-input:focus {
-    border-color: #2684FF;
 }

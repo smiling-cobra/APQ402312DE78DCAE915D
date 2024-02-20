@@ -5,8 +5,16 @@
 
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
+
   --input-background: #3B3B3B;
   --input-color: #E3E3E3;
+  --error-color: red;
+
+  --base-gap: 8px;
+  --border-radius: 8px;
+
+  --font-size-m: 14px;
+  --font-size-l: 32px;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -20,7 +28,6 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
   margin: 0;
+  font-size: var(--font-size-l);
 }
