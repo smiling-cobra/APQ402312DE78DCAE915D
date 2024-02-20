@@ -1,0 +1,16 @@
+.table-pagination__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.table-pagination__button {
+    padding: 8px;
+    margin: 0 4px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 8px;
+    color: var(--input-color);
+    background-color: var(--input-background);
+}

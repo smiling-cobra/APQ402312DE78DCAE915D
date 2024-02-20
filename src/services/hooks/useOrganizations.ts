@@ -8,7 +8,7 @@ export const useOrganizations = (query: string) => {
         {
             revalidateIfStale: false,
             revalidateOnFocus: false,
-            revalidateOnReconnect: false
+            revalidateOnReconnect: true
           }
     );
 };

@@ -10,4 +10,10 @@
     width: 100%;
     box-sizing: border-box;
     font-size: 14px;
+    background-color: var(--input-background);
+    color: var(--input-color);
+}
+
+.base-input:focus {
+    border-color: #2684FF;
 }

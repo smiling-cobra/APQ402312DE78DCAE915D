@@ -1,14 +1,14 @@
 import useSWR from "swr";
-import { fetcher } from "../fetcher";
+import { fetchWithPagination } from "../fetcher";
 
 export const useRepositories = (url: string, page: number) => {
     return useSWR(
         url ? `${url}?page=${page}&per_page=${10}` : null,
-        fetcher,
+        fetchWithPagination,
         {
             revalidateIfStale: false,
             revalidateOnFocus: false,
-            revalidateOnReconnect: false
+            revalidateOnReconnect: true
         }
     );
 };

@@ -4,7 +4,7 @@ import { debounce, filterRepos, updateOpenIssuesFilter } from "../utils";
 import { useOrganizations } from "../services/hooks/useOrganizations";
 import { useRepositories } from "../services/hooks/useRepositories";
 import { OrganizationInput } from "../components/OrganizationInput/OrganizationInput";
-import { Spinner } from "../components/Spinner/Spinner";
+import { PaginationControl } from "../components/Pagination/PaginationControl";
 import { Filters } from "../components/Filters/Filters";
 import {
   OpenIssuesFilter,
@@ -30,15 +30,13 @@ export const Main = () => {
 
   const {
     data: allRepositories,
-    error: reposErrors,
+    error: reposError,
     isLoading: isReposLoading,
   } = useRepositories(selectedOrg?.repos_url ?? "", page);
 
-  console.info("reposErrors", reposErrors);
-
   const organizationRepos: OrganizationRepo[] = useMemo(() => {
     if (!allRepositories) return [];
-    return filterRepos(allRepositories, repoNameFilter, openIssuesFilter);
+    return filterRepos(allRepositories.data, repoNameFilter, openIssuesFilter);
   }, [repoNameFilter, allRepositories, openIssuesFilter]);
 
   const selectOptions: SelectOptions[] = useMemo(() => {
@@ -84,26 +82,33 @@ export const Main = () => {
       <div className="form">
         <OrganizationInput
           options={selectOptions}
-          error={orgErrors?.message}
+          orgError={orgErrors?.message}
           onChange={setSelectedOrg}
+          // if reposError is present, disable the input
+          isReposError={reposError?.message.length > 0}
           onInputChange={handleOrganizationChange}
         />
         <Filters
-          selectedOrg={selectedOrg}
+          isOrgPresent={Boolean(selectedOrg)}
           repoNameFilter={repoNameFilter}
           openIssuesFilter={openIssuesFilter}
           handleNameFilterChange={handleNameFilterChange}
           handleIssueFilterChange={handleIssueFilterChange}
         />
       </div>
-      {isReposLoading ? (
-        <Spinner />
-      ) : organizationRepos.length ? (
-        <BaseTable
+      <BaseTable
+        isOrgPresent={Boolean(selectedOrg)}
+        isLoading={isReposLoading}
+        repositories={organizationRepos}
+        reposErrorMessage={reposError?.message}
+      />
+      {organizationRepos.length > 0 && (
+        <PaginationControl
+          currentPage={page}
           onPageChange={handlePageChange}
-          repositories={organizationRepos}
+          lastPage={allRepositories?.lastPage}
         />
-      ) : null}
+      )}
     </main>
   );
 };
