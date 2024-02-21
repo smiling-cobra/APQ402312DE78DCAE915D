@@ -5,3 +5,7 @@
     justify-content: space-between;
     width: 100%;
 }
+
+.base-input__container:last-child {
+    padding-right: 0;
+}

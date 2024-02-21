@@ -135,13 +135,6 @@ export const Main = () => {
   return (
     <main>
       <div className="form">
-        {manualOrgError && (
-          <BaseButton
-            label="R"
-            className="refetch-button"
-            onHandleClick={handleRefetch}
-          />
-        )}
         <OrganizationInput
           value={selectedOrg?.name}
           options={selectOptions}
@@ -150,7 +143,14 @@ export const Main = () => {
           // if reposError is present, disable the input
           isReposError={reposError?.message.length > 0}
           onInputChange={handleOrganizationChange}
-        />
+          />
+          {manualOrgError &&(
+            <BaseButton
+              label="R"
+              className="refetch-button"
+              onHandleClick={handleRefetch}
+            />
+          )}
         <Filters
           isOrgPresent={Boolean(selectedOrg)}
           repoNameFilter={repoNameFilter}
