@@ -44,9 +44,9 @@ export const BaseTable: React.FC<BaseTableProps> = ({
             </tbody>
           </table>
         </React.Fragment>
-      ) : isOrgPresent ? (
-        <span className="error-message">{errorMessage}</span>
-      ) : null}
+      ) : (
+        isOrgPresent && <span className="error-message">{errorMessage}</span>
+      )}
     </div>
   );
 };

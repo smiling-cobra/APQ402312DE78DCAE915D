@@ -1,5 +1,7 @@
-import { FilterName, OpenIssuesFilter, OrganizationRepo } from "./types";
+import { FilterName, OpenIssuesFilter, OrganizationRepo } from "../types";
 
+// Decided to create custom debounce function
+// to avoid using 3rd party libraries
 export const debounce = <T extends unknown[]>(
     func: (...args: T) => void,
     delay: number

@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import { fetchWithPagination } from "../fetcher";
 
-export const useRepositories = (url: string, page: number) => {
+export const useRepositories = (url: string | undefined, page: number) => {
     return useSWR(
         url ? `${url}?page=${page}&per_page=${10}` : null,
         fetchWithPagination,

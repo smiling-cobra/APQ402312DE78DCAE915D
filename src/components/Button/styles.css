@@ -1,0 +1,9 @@
+.base-button {
+    cursor: pointer;
+    padding: var(--base-gap);
+    margin: 0 var(--base-gap);
+    border: 1px solid var(--input-color);
+    color: var(--input-color);
+    border-radius: var(--border-radius);
+    background-color: var(--input-background);
+}

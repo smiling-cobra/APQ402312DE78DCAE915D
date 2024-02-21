@@ -1,4 +1,4 @@
-import { parseResponse } from "./paginationUtils";
+import { parseResponse } from "../utils/paginationUtils";
 
 const accessToken = import.meta.env.VITE_GIT_ACCESS_TOKEN;
 
@@ -10,6 +10,8 @@ const requestConfig = {
   },
 }
 
+// Maybe it would be better to have a single fetcher function
+// but I decided to separate them since they are used in different contexts
 export const fetcher = async (url: string) => {
   const response = await fetch(url, requestConfig);
 

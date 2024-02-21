@@ -7,13 +7,15 @@ interface OrganizationInputProps {
   options: SelectOptions[];
   onInputChange: (value: string) => void;
   onChange: (value: React.SetStateAction<Organization | undefined>) => void;
-  orgError: string;
   isReposError: boolean;
+  orgError?: string;
+  value?: string;
 }
 
 const customColor = '#3B3B3B';
 const color = '#E3E3E3';
 
+// This is bad, I agree and I don't like it either.
 const customStyles = {
   control: (provided: any) => ({
     ...provided,
@@ -68,7 +70,8 @@ export const OrganizationInput: React.FC<OrganizationInputProps> = ({
   onInputChange,
   onChange,
   orgError,
-  isReposError
+  isReposError,
+  value,
 }) => {
   return (
     <div className="organization-input-container">
@@ -76,11 +79,11 @@ export const OrganizationInput: React.FC<OrganizationInputProps> = ({
         {`Something is wrong with your request. ${orgError}.`}
       </span>}
       <Select
-        isDisabled={isReposError}
-        styles={customStyles}
-        className="organization-input"
-        placeholder="Start typing..."
+        inputValue={value}
         options={options}
+        styles={customStyles}
+        isDisabled={isReposError}
+        placeholder="Start typing..."
         onInputChange={onInputChange}
         onChange={(option: SingleValue<SelectOptions>) =>
           onChange(option?.value)

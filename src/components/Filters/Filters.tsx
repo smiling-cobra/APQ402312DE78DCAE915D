@@ -20,7 +20,7 @@ export const Filters: React.FC<FiltersProps> = ({
 }) => {
   return (
     <div className="form-filters">
-      {isOrgPresent ? (
+      {isOrgPresent && (
         <React.Fragment>
           <BaseInput
             type="text"
@@ -45,7 +45,7 @@ export const Filters: React.FC<FiltersProps> = ({
             onChange={handleIssueFilterChange}
           />
         </React.Fragment>
-      ) : null}
+      )}
     </div>
   );
 };

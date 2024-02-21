@@ -1,16 +1,11 @@
-.table-pagination__container {
+.pagination__container {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: calc(var(--base-gap) * 3);
 }
 
-.table-pagination__button {
-    cursor: pointer;
-    padding: var(--base-gap);
-    margin: 0 var(--base-gap);
-    border: 1px solid var(--input-color);
-    color: var(--input-color);
-    border-radius: var(--border-radius);
-    background-color: var(--input-background);
+.pagination__button {
+    width: 70px;
+    height: 34px;
 }

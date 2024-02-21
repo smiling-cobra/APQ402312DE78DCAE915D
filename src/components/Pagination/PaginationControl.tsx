@@ -1,4 +1,5 @@
 import { Pagination } from "../../types";
+import { BaseButton } from "../Button/BaseButton";
 import "./styles.css";
 
 interface PaginationControlProps {
@@ -13,21 +14,19 @@ export const PaginationControl: React.FC<PaginationControlProps> = ({
   onPageChange,
 }) => {
   return (
-    <div className="table-pagination__container">
-      <button
-        className="table-pagination__button"
-        onClick={() => onPageChange(Pagination.PREV)}
-        disabled={currentPage === 1}
-      >
-        Previous
-      </button>
-      <button
-        className="table-pagination__button"
-        onClick={() => onPageChange(Pagination.NEXT)}
-        disabled={lastPage === null}
-      >
-        Next
-      </button>
+    <div className="pagination__container">
+      <BaseButton
+        label="Previous"
+        className="pagination__button"
+        onHandleClick={() => onPageChange(Pagination.PREV)}
+        isDisabled={currentPage === 1}
+      />
+      <BaseButton
+        label="Next"
+        className="pagination__button"
+        onHandleClick={() => onPageChange(Pagination.NEXT)}
+        isDisabled={lastPage === null}
+      />
     </div>
   );
 };
